@@ -1,0 +1,5 @@
+check.txt
+vendor
+.htaccess
+composer.lock
+*.log

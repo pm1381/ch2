@@ -1,0 +1,31 @@
+{
+    "require-dev": {
+        "symfony/var-dumper": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.4",
+        "mongodb/mongodb": "^1.11",
+        "myclabs/php-enum": "^1.8",
+        "phroute/phroute": "^2.2",
+        "illuminate/database": "^9.36",
+        "bramus/router": "~1.6",
+        "tightenco/collect": "^9.33",
+        "monolog/monolog": "^2.8",
+        "filp/whoops": "^2.14",
+        "rakit/validation": "^1.4",
+        "ghostff/session": "^2.0",
+        "predis/predis": "^2.0",
+        "phpmailer/phpmailer": "^6.7",
+        "firebase/php-jwt": "^6.3"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --colors=always",
+        "lint": "php-cs-fixer fix --diff --dry-run",
+        "fix": "php-cs-fixer fix"
+    }
+}
