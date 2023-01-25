@@ -11,7 +11,8 @@ use App\Controllers\Refrence\SiteRefrenceController;
 use App\Helpers\Tools;
 use App\Models\UserModel;
 
-class ForgotPasswordController extends SiteRefrenceController {    
+class ForgotPasswordController extends SiteRefrenceController
+{
     public function showLinkRequestForm()
     {
         Tools::render("site\auth\showLinkRequestForm");
@@ -20,9 +21,12 @@ class ForgotPasswordController extends SiteRefrenceController {
     public function reset()
     {
         $dataArray = Input::getDataForm();
-        $validateResult = $this->AuthValidation($dataArray, [
+        $validateResult = $this->authValidation(
+            $dataArray,
+            [
             'email' => 'required|email'
-        ]);
+            ]
+        );
 
         if ($validateResult['error'] == false) {
             $userEntity = new User();
@@ -30,7 +34,7 @@ class ForgotPasswordController extends SiteRefrenceController {
             $userModel = new UserModel();
             $result = $userModel->loginCheck($userEntity);
             if (count($result) > 0) {
-                $forgotPassEvent = new PasswordChange(new User, $dataArray);
+                $forgotPassEvent = new PasswordChange(new User(), $dataArray);
                 $forgotPassEvent->dispatch();
                 $session = new Session();
                 $session->setFlash('success', 'email has been sent successfully');
@@ -42,13 +46,12 @@ class ForgotPasswordController extends SiteRefrenceController {
             $errors[] = array_values($validateResult['firstError'])[0];
         }
         $session = new Session();
-        (count($errors))? $session->setFlash('error', $errors[0]): '';
+        (count($errors)) ? $session->setFlash('error', $errors[0]) : '';
         // Tools::redirect(ORIGIN . '/password/reset/');
         // Response::setStatus(400, $errors[0]);
     }
 
     public function showResetForm($token)
     {
-
     }
 }

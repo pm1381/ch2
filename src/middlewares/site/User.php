@@ -6,8 +6,10 @@ use App\Classes\Response;
 use App\Entities\User;
 use App\Helpers\Tools;
 
-class UserMiddleWare {
-    public function numCheck(...$inputs) {
+class UserMiddleWare
+{
+    public function numCheck(...$inputs)
+    {
         $user = new User();
         if ($user->isLogin()['login']) {
             foreach ($inputs as $input) {

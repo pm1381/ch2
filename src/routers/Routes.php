@@ -2,8 +2,8 @@
 
 namespace App\Routers;
 
-class WebRoutes {
-
+class Routes
+{
     private $router;
 
     public function __construct($router)
@@ -24,6 +24,4 @@ class WebRoutes {
         $this->router->post("/users/", 'site\UserController@createUser');
         $this->router->post("/users/{id}/", 'site\UserController@updateUser');
     }
-
 }
-?>

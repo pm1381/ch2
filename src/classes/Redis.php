@@ -86,12 +86,13 @@ class Redis
         $this->predis->lrange($key, $start, $end);
     }
 
-    public function getKeys($pattern="*")
+    public function getKeys($pattern = "*")
     {
         $this->predis->keys($pattern);
     }
 
-    public function get($key) {
+    public function get($key)
+    {
         $result = $this->predis->get($key);
         if ($result == "") {
             return false;
@@ -143,5 +144,4 @@ class Redis
     {
         return $this->predis->hscan($key, 0);
     }
-
 }

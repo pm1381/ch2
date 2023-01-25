@@ -2,6 +2,6 @@
 
 namespace App\Controllers\Refrence;
 
-class AdminRefrenceController extends GeneralRefrenceController  {
-    
+class AdminRefrenceController extends GeneralRefrenceController
+{
 }

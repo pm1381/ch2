@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Classes;
 
-class Cookie 
+class Cookie
 {
     protected $name;
     protected $content;
@@ -34,16 +35,15 @@ class Cookie
 
     public function remove()
     {
-        setcookie($this->name, "", time()-3600, '/');
+        setcookie($this->name, "", time() - 3600, '/');
     }
 
     public function get($name)
     {
         $content = null;
-        if(array_key_exists($name, $_COOKIE)) {
+        if (array_key_exists($name, $_COOKIE)) {
             $content = $_COOKIE[$name];
         }
         return $content;
     }
 }
-?>

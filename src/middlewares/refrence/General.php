@@ -4,7 +4,8 @@ namespace App\MiddleWares\Refrence;
 
 use App\Entities\User;
 
-class General {
+class General
+{
     public function login()
     {
         $userService = new User();

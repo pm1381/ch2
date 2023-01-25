@@ -13,7 +13,8 @@ use App\Classes\Response;
 use App\Models\UserModel;
 use App\Controllers\Refrence\SiteRefrenceController;
 
-class RegisterController extends SiteRefrenceController implements Auth {
+class RegisterController extends SiteRefrenceController implements Auth
+{
     public function showRegistrationForm()
     {
         Tools::render("site\auth\showRegister");
@@ -22,11 +23,14 @@ class RegisterController extends SiteRefrenceController implements Auth {
     public function register()
     {
         $dataArray = Input::getDataForm();
-        $validateResult = $this->AuthValidation($dataArray, [
+        $validateResult = $this->authValidation(
+            $dataArray,
+            [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6'
-        ]);
+            ]
+        );
 
         if ($validateResult['error'] == false) {
             $userModel = new UserModel();
@@ -48,7 +52,7 @@ class RegisterController extends SiteRefrenceController implements Auth {
         } else {
             $errors[] = array_values($validateResult['firstError'])[0];
         }
-        
+
         $session = new Session();
         $session->setFlash('error', $errors[0]);
 

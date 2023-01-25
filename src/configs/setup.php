@@ -39,6 +39,7 @@ define('ADMIN_VIEW', VIEW . 'admin' . DIRECTORY_SEPARATOR);
 define("CONTROLLER_NAMESPACE", "App\Controllers");
 
 // and adding all files from library floder
+// ./vendor/bin/phpcs  --standard=phpcs.xml src\ phpcs check error. to solve errors use phpcbf
 require LIBRARY . 'Function.php';
 
 $application = new Application();

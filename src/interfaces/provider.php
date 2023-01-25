@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Interfaces;
 
 interface Provider
@@ -7,4 +8,3 @@ interface Provider
 
     public function boot();
 }
-?>

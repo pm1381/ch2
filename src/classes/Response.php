@@ -2,8 +2,8 @@
 
 namespace App\Classes;
 
-class Response {
-    
+class Response
+{
     public static function setStatus($code, $text, $data = [])
     {
         header('Content-Type: application/json');

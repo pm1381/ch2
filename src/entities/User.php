@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 use App\Classes\Cookie;
@@ -7,7 +8,8 @@ use App\Classes\Session;
 use App\Models\UserModel;
 use DateTimeImmutable;
 
-class User {
+class User
+{
     private string $email = '';
     public string $name = '';
     private string $password = '';
@@ -15,10 +17,9 @@ class User {
     private int $admin = 1;
     private int $id;
     private string $remeberToken = '';
-    
-    /**
+/**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return htmlentities($this->name);
@@ -28,7 +29,7 @@ class User {
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -37,7 +38,7 @@ class User {
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return  htmlentities($this->email);
@@ -47,7 +48,7 @@ class User {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -56,7 +57,7 @@ class User {
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return htmlentities($this->password);
@@ -66,7 +67,7 @@ class User {
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -108,7 +109,6 @@ class User {
             $now = new DateTimeImmutable();
             $jwt = new Jwt();
             $result = $jwt->get($jwtString);
-            
             if ($result->iss == DOMAIN && $result->nbf < $now->getTimestamp() && $result->exp > $now->getTimestamp()) {
                 $data['login'] = true;
                 $data['user'] = $result->data;
@@ -119,7 +119,7 @@ class User {
 
     /**
      * Get the value of token
-     */ 
+     */
     public function getToken()
     {
         return $this->token;
@@ -129,7 +129,7 @@ class User {
      * Set the value of token
      *
      * @return  self
-     */ 
+     */
     public function setToken($token)
     {
         $this->token = $token;
@@ -138,7 +138,7 @@ class User {
 
     /**
      * Get the value of admin
-     */ 
+     */
     public function getAdmin()
     {
         return $this->admin;
@@ -148,7 +148,7 @@ class User {
      * Set the value of admin
      *
      * @return  self
-     */ 
+     */
     public function setAdmin($admin)
     {
         $this->admin = $admin;
@@ -157,7 +157,7 @@ class User {
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -167,7 +167,7 @@ class User {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -176,7 +176,7 @@ class User {
 
     /**
      * Get the value of remeberToken
-     */ 
+     */
     public function getRemeberToken()
     {
         return $this->remeberToken;
@@ -186,7 +186,7 @@ class User {
      * Set the value of remeberToken
      *
      * @return  self
-     */ 
+     */
     public function setRemeberToken($remeberToken)
     {
         $this->remeberToken = $remeberToken;

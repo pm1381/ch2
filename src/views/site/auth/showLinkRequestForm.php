@@ -7,7 +7,7 @@ use App\Classes\Session;
 <?php require_once VIEW . 'site\components\top.php' ?>
 <div class="card text-center" style="width: 100%;">
     <div class="card-header h5 text-white bg-primary">Password Reset</div>
-    <?php $session = new Session;?>
+    <?php $session = new Session();?>
     <p class="text-danger text-center"><?php echo $session->getFlash('error') ?></p>
     <div class="card-body px-5">
         <p class="card-text py-2">

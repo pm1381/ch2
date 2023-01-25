@@ -1,5 +1,7 @@
 <?php
+
 use App\Classes\Session;
+
 ?>
 
 <?php require_once VIEW . 'site\components\top.php'; ?>
@@ -38,4 +40,4 @@ use App\Classes\Session;
 </div>
 </div>
 </form>
-<?php require_once VIEW . 'site\components\footer.php'; ?>
+<?php require_once VIEW . 'site\components\footer.php';

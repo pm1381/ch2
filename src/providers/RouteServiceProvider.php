@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Providers;
 
 use App\Helpers\Tools;
@@ -8,7 +9,8 @@ use Bramus\Router\Router;
 use ReflectionClass;
 use ReflectionMethod;
 
-class RouteServiceProvider extends ServiceProvider implements Provider {
+class RouteServiceProvider extends ServiceProvider implements Provider
+{
     public function register()
     {
         $router = new Router();
@@ -26,7 +28,5 @@ class RouteServiceProvider extends ServiceProvider implements Provider {
 
     public function boot()
     {
-        
     }
 }
-

@@ -2,8 +2,8 @@
 
 namespace App\Routers;
 
-class AuthRoutes {
-
+class AuthRoutes
+{
     private $router;
 
     public function __construct($router)
@@ -33,10 +33,12 @@ class AuthRoutes {
         $this->router->get('/password/reset/{token}/', 'site\auth\ForgotPasswordController@showResetForm');
     }
 
-    private function authMiddleWare(){
+    private function authMiddleWare()
+    {
         $this->router->before('POST', '/login/', 'middlewares\site\LoginMiddleWare@ipCheck');
         $this->router->before('GET', '/login/', 'middlewares\site\LoginMiddleWare@loginAttempt');
     }
-    private function authAdmin(){}
+    private function authAdmin()
+    {
+    }
 }
-

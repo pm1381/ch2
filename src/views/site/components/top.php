@@ -1,5 +1,7 @@
-<?PHP 
+<?PHP
+
     use App\Helpers\Tools;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -15,7 +15,7 @@ class Application
             $fullName = 'App\providers' . "\\" .  explode(".", $value)[0];
             $refclass = new ReflectionClass($fullName);
             $methods = $refclass->getMethods();
-            foreach ($methods as  $method) {
+            foreach ($methods as $method) {
                 if ($method->name == 'register') {
                     $registers[] = ['method' => 'register', "class" => $method->class];
                 }
@@ -25,7 +25,7 @@ class Application
                 }
             }
         }
-        
+
         foreach ($registers as $value) {
             $this->runClosures($value);
         }
@@ -37,8 +37,7 @@ class Application
     private function runClosures($value, $params = [])
     {
         $refMethod = new ReflectionMethod($value['class'], $value['method']);
-        $closure = $refMethod->getClosure(new $value['class']);
+        $closure = $refMethod->getClosure(new $value['class']());
         call_user_func_array($closure, $params);
     }
 }
-?>

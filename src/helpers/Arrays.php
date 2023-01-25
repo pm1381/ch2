@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Helpers;
 
-class Arrays 
+class Arrays
 {
     public static function errorView()
     {

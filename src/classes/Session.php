@@ -24,18 +24,16 @@ class Session
         unset($_SESSION[$key]);
     }
 
-    public function get($key, $default="")
+    public function get($key, $default = "")
     {
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
         }
         return $default;
-        
     }
 
     public static function changeConfigs()
     {
-
     }
 
     public function setFlash($key, $val)
@@ -50,7 +48,7 @@ class Session
         unset($_SESSION['_flashData'][$key]);
     }
 
-    public function getFlash($key, $default="")
+    public function getFlash($key, $default = "")
     {
         if (array_key_exists('_flashData', $_SESSION) && array_key_exists($key, $_SESSION['_flashData'])) {
             $flashedData = $_SESSION['_flashData'][$key];

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Classes;
 
@@ -23,7 +23,7 @@ class Jwt
 
     /**
      * Get the value of signAlgorithm
-     */ 
+     */
     public function getSignAlgorithm()
     {
         return $this->signAlgorithm;
@@ -33,7 +33,7 @@ class Jwt
      * Set the value of signAlgorithm
      *
      * @return  self
-     */ 
+     */
     public function setSignAlgorithm($signAlgorithm)
     {
         $this->signAlgorithm = $signAlgorithm;
@@ -42,7 +42,7 @@ class Jwt
 
     /**
      * Get the value of secretKey
-     */ 
+     */
     public function getSecretKey()
     {
         return $this->secretKey;
@@ -52,7 +52,7 @@ class Jwt
      * Set the value of secretKey
      *
      * @return  self
-     */ 
+     */
     public function setSecretKey($secretKey)
     {
         $this->secretKey = $secretKey;
@@ -61,7 +61,7 @@ class Jwt
 
     /**
      * Get the value of issurer
-     */ 
+     */
     public function getIssurer()
     {
         return $this->issurer;
@@ -71,7 +71,7 @@ class Jwt
      * Set the value of issurer
      *
      * @return  self
-     */ 
+     */
     public function setIssurer($issurer)
     {
         $this->issurer = $issurer;
@@ -80,7 +80,7 @@ class Jwt
 
     /**
      * Get the value of uniqueToken
-     */ 
+     */
     public function getUniqueToken()
     {
         return $this->uniqueToken;
@@ -90,7 +90,7 @@ class Jwt
      * Set the value of uniqueToken
      *
      * @return  self
-     */ 
+     */
     public function setUniqueToken($uniqueToken)
     {
         $this->uniqueToken = $uniqueToken;
@@ -118,7 +118,7 @@ class Jwt
 
     /**
      * Get the value of time
-     */ 
+     */
     public function getTime()
     {
         return $this->time;
@@ -128,7 +128,7 @@ class Jwt
      * Set the value of time
      *
      * @return  self
-     */ 
+     */
     public function setTime($time)
     {
         $this->time = $time;

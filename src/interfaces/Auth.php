@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Interfaces;
 
 interface Auth
 {
-    public function AuthValidation(array $data, array $pattern);
+    public function authValidation(array $data, array $pattern);
 }
-?>

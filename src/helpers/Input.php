@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 class Input
@@ -27,7 +28,8 @@ class Input
         return false;
     }
 
-    public static function getDataJson($wantArray) {
+    public static function getDataJson($wantArray)
+    {
         $json = file_get_contents('php://input');
         if ($wantArray) {
             return json_decode($json, true);

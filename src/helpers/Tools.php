@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-
 use App\Exceptions\Exception404;
 use Rakit\Validation\ErrorBag;
 
@@ -54,20 +53,21 @@ class Tools
     public static function getIp()
     {
         $ipaddress = '';
-        if (getenv('HTTP_CLIENT_IP'))
+        if (getenv('HTTP_CLIENT_IP')) {
             $ipaddress = getenv('HTTP_CLIENT_IP');
-        else if(getenv('HTTP_X_FORWARDED_FOR'))
+        } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
             $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-        else if(getenv('HTTP_X_FORWARDED'))
+        } elseif (getenv('HTTP_X_FORWARDED')) {
             $ipaddress = getenv('HTTP_X_FORWARDED');
-        else if(getenv('HTTP_FORWARDED_FOR'))
+        } elseif (getenv('HTTP_FORWARDED_FOR')) {
             $ipaddress = getenv('HTTP_FORWARDED_FOR');
-        else if(getenv('HTTP_FORWARDED'))
-        $ipaddress = getenv('HTTP_FORWARDED');
-        else if(getenv('REMOTE_ADDR'))
+        } elseif (getenv('HTTP_FORWARDED')) {
+            $ipaddress = getenv('HTTP_FORWARDED');
+        } elseif (getenv('REMOTE_ADDR')) {
             $ipaddress = getenv('REMOTE_ADDR');
-        else
+        } else {
             $ipaddress = 'UNKNOWN';
+        }
         return $ipaddress;
     }
 
@@ -81,7 +81,7 @@ class Tools
         return $token;
     }
 
-    public static function getFilesInFolder($path, array $ignoreClasses=[])
+    public static function getFilesInFolder($path, array $ignoreClasses = [])
     {
         $ignoreClasses[] = '.';
         $ignoreClasses[] = '..';
@@ -138,7 +138,7 @@ class Tools
     public static function uniteUrls($url)
     {
         $lastChar = substr($url, -1);
-        if ($lastChar != "/"){
+        if ($lastChar != "/") {
             $url .= "/";
         }
         return $url;

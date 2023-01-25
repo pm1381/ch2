@@ -4,7 +4,8 @@ namespace App\Controllers\Refrence;
 
 use ReflectionClass;
 
-class GeneralRefrenceController {
+class GeneralRefrenceController
+{
     protected $model = null;
     protected $view = null;
 
@@ -21,14 +22,15 @@ class GeneralRefrenceController {
         }
     }
 
-    protected function makeClassData($dataArray, $className) {
+    protected function makeClassData($dataArray, $className)
+    {
         $reflectionClass = new ReflectionClass($className);
         $newInstance = $reflectionClass->newInstanceWithoutConstructor();
         $userClassProperties = $reflectionClass->getProperties();
         if (count($dataArray) == count($userClassProperties)) {
             $i = 0;
             foreach ($dataArray as $key => $value) {
-                foreach($userClassProperties as $prop) {
+                foreach ($userClassProperties as $prop) {
                     $prop->setAccessible(true);
                     if ($key == $prop->getName()) {
                         $i++;

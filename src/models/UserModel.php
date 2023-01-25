@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Classes\Date;
@@ -6,11 +7,12 @@ use App\Classes\Redis;
 use App\Entities\User as ClassesUser;
 use Illuminate\Database\Eloquent\Model;
 
-class UserModel extends BaseModel{
-
+class UserModel extends BaseModel
+{
     protected $fillable = ['email', 'name', 'password', 'updated_at', 'created_at', 'token'];
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->table = 'user';
         $this->primaryKey = 'id';
         Model::preventsSilentlyDiscardingAttributes(true);
@@ -29,7 +31,8 @@ class UserModel extends BaseModel{
         $this->attributes['name'] = strtoupper($value);
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         $redis = new Redis();
         $redisResult = $redis->get('allUsers');
         if ($redisResult) {
@@ -41,7 +44,8 @@ class UserModel extends BaseModel{
         return $res;
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         // i wont erase this one . because it is really handy
         return UserModel::where('id', '=', $id)->select('email', 'name')->get();
     }
@@ -51,7 +55,8 @@ class UserModel extends BaseModel{
         return UserModel::where($fieldName, '=', $value)->get();
     }
 
-    public function updateById(ClassesUser $user, $id) {
+    public function updateById(ClassesUser $user, $id)
+    {
         $data['updated_at'] = Date::now();
         if ($user->getEmail() != "") {
             $data['email'] = $user->getEmail();
@@ -64,7 +69,7 @@ class UserModel extends BaseModel{
 
     public function updatePassword(ClassesUser $user, $newPass)
     {
-        return UserModel::where('email', $user->getEmail())->where('remember_token', '=', $user->getRemeberToken())->update(['updated_at' => Date::now() , 'password' => $newPass]);        
+        return UserModel::where('email', $user->getEmail())->where('remember_token', '=', $user->getRemeberToken())->update(['updated_at' => Date::now() , 'password' => $newPass]);
     }
 
     public function updateToken(ClassesUser $user)
@@ -77,9 +82,11 @@ class UserModel extends BaseModel{
         return UserModel::where('email', '=', $user->getEmail())->update(['updated_at' => Date::now(), 'remember_token' => $user->getRemeberToken()]);
     }
 
-    public function insertUser(ClassesUser $user) {
-        $hashedPassword = $user->hashPassword(); // first check if user exist before;
-        if(count($this->loginCheck($user)) > 0) {
+    public function insertUser(ClassesUser $user)
+    {
+        $hashedPassword = $user->hashPassword();
+// first check if user exist before;
+        if (count($this->loginCheck($user)) > 0) {
             return false;
         }
         $data = [
@@ -89,11 +96,12 @@ class UserModel extends BaseModel{
             'updated_at' => Date::now(),
             'created_at' => Date::now(),
             'token' => $user->getToken()
-        ]; 
+        ];
         return UserModel::insertGetId($data);
     }
 
-    public function loginCheck(ClassesUser $user) {
+    public function loginCheck(ClassesUser $user)
+    {
         $email = $user->getEmail();
         return UserModel::where('email', '=', $email)->get();
     }
@@ -103,7 +111,6 @@ class UserModel extends BaseModel{
         $user->setName($data['name']);
         $user->setEmail($data['email']);
         $user->setPassword($data['password']);
-
         $createdUser = $this->insertUser($user);
         if ($createdUser > 0) {
             $user->setId($createdUser);
