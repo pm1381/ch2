@@ -2,7 +2,7 @@
 
 namespace App\Routers;
 
-class WebRouter {
+class WebRoutes {
 
     private $router;
 
