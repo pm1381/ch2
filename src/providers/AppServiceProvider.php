@@ -14,6 +14,6 @@ class AppServiceProvider extends ServiceProvider implements Provider
     }
 
     public function boot()
-    {
+    { 
     }
 }
