@@ -1,0 +1,10 @@
+version: '3.3'
+services: 
+  web:
+    build: 
+      dockerfile: ./docker/Dockerfile
+    container_name: php_ch2_container
+    volumes: 
+      - ./:/var/www/html/
+    ports: 
+      - 8000:80
