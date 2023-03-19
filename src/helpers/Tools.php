@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Exceptions\Exception404;
+use App\Classes\Response;
 use Rakit\Validation\ErrorBag;
 
 class Tools
@@ -24,25 +24,40 @@ class Tools
         return $result;
     }
 
+    public static function getPage()
+    {
+        $page = Input::get('page', null);
+        if ($page == null) {
+            $page = 1;
+        }
+        return $page;
+    }
+
+    public static function startSkip($limit)
+    {
+        $skip = (self::getPage() - 1) * $limit;
+        return $skip;
+    }
+
     public static function slashToBackSlash($string)
     {
         return str_replace("/", "\\", $string);
     }
 
-    public static function checkArray($key, $array)
+    public static function checkArray($key, $array, $default = "")
     {
         if (array_key_exists($key, $array)) {
             return $array[$key];
         }
-        return '';
+        return $default;
     }
 
-    public static function checkObject($object, $property)
+    public static function checkObject($object, $property, $default = "")
     {
         if (property_exists($object, $property)) {
             return $object->$property;
         }
-        return '';
+        return $default;
     }
 
     public static function createCode()
@@ -96,8 +111,14 @@ class Tools
             $data = json_decode(json_encode($found, JSON_INVALID_UTF8_IGNORE));
             require_once $file;
         } else {
-            print_f("page not found");
+            Response::setStatus(404, 'page not found');
         }
+    }
+
+    public static function json($data = ['error' => false])
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
     }
 
     public static function translateErrors(ErrorBag $allErrors, $translation)
@@ -146,6 +167,56 @@ class Tools
 
     public static function getUrl()
     {
-        return ORIGIN . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        return DOMAIN . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    }
+
+    public static function numberToFa($value)
+    {
+        return self::convertNumber($value, 'toFa');
+    }
+
+    public static function numberToEn($value)
+    {
+        return self::convertNumber($value, 'toEn');
+    }
+
+    public static function convertNumber($value, $type)
+    {
+        $faDigit = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $enDigit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $arDigit = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١', '٠'];
+
+        $value = str_replace($arDigit, $faDigit, $value);
+
+        if ($type == 'toFa') {
+            return str_replace($enDigit, $faDigit, $value);
+        } else {
+            return str_replace($faDigit, $enDigit, $value);
+        }
+    }
+
+    public static function getCurrentUrl()
+    {
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    }
+
+    public static function option($array, $selected = "")
+    {
+        $list = '';
+        foreach ($array as $key => $value) {
+            $get = '';
+            if (is_array($value)) {
+                if ($key == $selected) {
+                    $get = 'selected';
+                }
+                $list .= '<option class="optionData" data-name="' . $value['title'] . '" value="' . $value['id'] . '" ' . $get . '>' . $value['title'] . '</option>';
+            } else {
+                if ($value == $selected) {
+                    $get = 'selected';
+                }
+                $list .= '<option class="optionData" data-name="' . $value . '" value="' . $value . '" ' . $get . '>' . $value . '</option>';
+            }
+        }
+        return $list;
     }
 }

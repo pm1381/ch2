@@ -5,21 +5,31 @@ services:
       context: ./docker
       dockerfile: Dockerfile
     container_name: php_container
+    volumes:
+      - /var/www/html/vendor
+      - ./:/var/www/html/
     ports: 
       - 7000:80
+    environment:
+      HOST_NAME: ${HOST_NAME}
+      DRIVER: ${DRIVER}
+      USERNAME: ${USERNAME}
+      PASSWORD: ${PASSWORD}
+      DB_NAME: ${DB_NAME}
+      LIMIT: ${LIMIT}
 
   maria_db:
     container_name: 'php_voip_database_container'
     image: mariadb:10.4
     volumes:
       - sqlData:/var/libs/mariadb/
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: parham
       MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: hera   
+      MYSQL_DATABASE: hera
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -30,4 +40,6 @@ services:
       - PMA_ARBITRARY=1
 
 volumes:
-  sqlData:   
+  sqlData:
+
+# docker compose -f docker-compose.dev.yaml up -d

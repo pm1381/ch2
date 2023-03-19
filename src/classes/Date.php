@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use App\Helpers\Tools;
+
 class Date
 {
     public static function autoTime($num, $value, $format = "Y-m-d H:i:s")
@@ -57,5 +59,40 @@ class Date
         }
 
         return 'حدود ' . $ago . ' پیش';
+    }
+
+    // phpcs:ignore
+    public static function M2J($format, $date = "")
+    {
+        if (!$date) {
+            $date = self::now();
+        }
+
+        if (!self::isTimestamp($date)) {
+            if (strtotime($date)) {
+                $date = strtotime($date);
+            } else {
+                return '';
+            }
+        } elseif ($date < 0) {
+            return '';
+        }
+
+        return jdate($format, $date);
+    }
+
+    // phpcs:ignore
+    public static function J2M($format, $date)
+    {
+        $date = explode(" ", Tools::numberToEn($date));
+        $array = explode("/", $date[0]);
+        $getDate = jalali_to_gregorian($array[0], $array[1], $array[2]);
+
+        $time = "";
+        if (isset($date[1])) {
+            $time = $date[1];
+        }
+
+        return date($format, strtotime(trim($getDate[0] . '-' . $getDate[1] . '-' . $getDate[2] . ' ' . $time)));
     }
 }
